@@ -1,0 +1,17 @@
+.table {
+  display: block;
+  width: 50%;
+  height: 556px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  margin: auto;
+  border: 2px solid #333;
+  border-top: none;
+  padding: 20px;
+}
+.number {
+  width: 300px;
+}
+.gray {
+  background-color: #f4f4f4;
+}

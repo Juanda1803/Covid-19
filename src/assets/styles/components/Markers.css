@@ -1,0 +1,9 @@
+.country {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+}
+.country__image {
+  width: 100px;
+}

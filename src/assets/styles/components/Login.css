@@ -1,0 +1,27 @@
+.login__form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.login__form--container {
+  background-color: rgba(40, 40, 40, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 30px;
+  width: 500px;
+  height: 450px;
+  border-radius: 30px;
+}
+.login-container__title {
+  color: #7ddf64;
+  margin: 10px;
+  font-size: 50px;
+}
+
+.login-container__item label {
+  font-size: 25px;
+}
