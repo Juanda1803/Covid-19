@@ -1,0 +1,9 @@
+.leaflet-container {
+  width: 100vh;
+  height: 80vh;
+  background-color: #333;
+}
+#map-template {
+  height: 80vh;
+  background-color: #333;
+}
