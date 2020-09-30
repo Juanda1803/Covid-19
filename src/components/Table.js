@@ -11,12 +11,14 @@ const Table = ({ countries }) => {
           className += 'gray'
         }
         return (
-          <tr className={className}>
-            <td className='number'>{country}</td>
-            <td>
-              <strong>{cases}</strong>
-            </td>
-          </tr>
+          <thead key={id}>
+            <tr className={className}>
+              <td className='number'>{country}</td>
+              <td>
+                <strong>{cases}</strong>
+              </td>
+            </tr>
+          </thead>
         )
       })}
     </div>

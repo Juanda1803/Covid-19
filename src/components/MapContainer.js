@@ -26,20 +26,23 @@ const MapContainer = () => {
         return data
       })
   }, [])
-
   return (
-    <div>
-      <Map
-        style={{ height: '94vh', width: '100%' }}
-        center={state.currentLocation}
-        zoom={state.zoom}
-      >
-        <TileLayer
-          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">JuanGonzalez</a> contributors'
-        />
-        <Markers data={state.data} />
-      </Map>
+    <div className='map-container'>
+      <div className='map__container'>
+        <Map
+          // style={{ height: '94vh', width: '100%' }}
+          className='map'
+          center={state.currentLocation}
+          zoom={state.zoom}
+        >
+          <TileLayer
+            url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">JuanGonzalez</a> contributors'
+          />
+
+          <Markers data={state.data} />
+        </Map>
+      </div>
     </div>
   )
 }

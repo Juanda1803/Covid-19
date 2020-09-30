@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import '../assets/styles/components/Loader.css'
+import '../assets/styles/components/PageLoading.css'
 
 export default class Loader extends Component {
   render () {

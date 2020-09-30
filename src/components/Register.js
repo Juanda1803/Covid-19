@@ -2,11 +2,15 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useFirebaseApp, useUser } from 'reactfire'
 
+import PageLoading from './PageLoading'
+import PageError from './PageError'
 import '../assets/styles/components/Register.css'
 import '../assets/styles/pages/Home.css'
 
 const Register = () => {
   const [state, setState] = useState({
+    loading: false,
+    error: null,
     form: {
       name: '',
       lastname: '',
@@ -16,7 +20,6 @@ const Register = () => {
       password: ''
     }
   })
-
   const firebase = useFirebaseApp()
   const user = useUser()
 
@@ -30,15 +33,30 @@ const Register = () => {
   }
 
   const handleClick = async e => {
-    await firebase
-      .auth()
-      .createUserWithEmailAndPassword(state.form.email, state.form.password)
+    setState({ loading: true, error: null })
+    try {
+      await firebase
+        .auth()
+        .createUserWithEmailAndPassword(state.form.email, state.form.password)
+      setState({ loading: false })
+    } catch (error) {
+      setState({ loading: false, error: error })
+    }
   }
+  const errorMsg = state.error && 'El usuario ya existe o hay algun problema'
 
   const handleSubmit = e => {
     e.preventDefault()
   }
   console.log(state.form.adress)
+
+  if (state.loading) {
+    return <PageLoading error={errorMsg} />
+  }
+  if (state.error) {
+    return <PageError />
+  }
+
   return (
     <div className='register background-img'>
       {!user && (
@@ -132,7 +150,7 @@ const Register = () => {
                 onChange={e => handleChange(e)}
               />
             </div>
-            <Link to='/'>
+            <Link to='/phote'>
               <button className='insert-button' onClick={e => handleClick(e)}>
                 Registrate
               </button>
@@ -140,6 +158,7 @@ const Register = () => {
             <p className='login-container__register'>
               ¿Ya tienes cuenta?
               <Link to='/login'> Iniciar Sesion</Link>
+              {state.error && { errorMsg }}
             </p>
           </div>
         </form>

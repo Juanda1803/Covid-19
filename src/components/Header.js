@@ -10,7 +10,6 @@ const Header = () => {
   const logout = async () => {
     await firebase.auth().signOut()
   }
-
   return (
     <header className='header'>
       <div className='header__container'>
@@ -21,7 +20,7 @@ const Header = () => {
         <div className='header__container--logout'>
           {user && (
             <>
-              <h3>{user.email}</h3>
+              <h3 className='header__user'>{user.email}</h3>
               <button className='in-button' onClick={logout}>
                 Cerrar Sesion
               </button>

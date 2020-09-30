@@ -1,9 +1,58 @@
-.country {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 250px;
+.info-container {
+  width: 230px;
+  font-family: "Baloo Tamma 2", cursive;
 }
-.country__image {
-  width: 100px;
+
+.info-flag {
+  height: 120px;
+  width: 100%;
+  background-size: cover;
+  border-radius: 5px;
+}
+
+.info-flag img {
+  width: 150px;
+  border-radius: 5px;
+}
+
+.info-name {
+  font-weight: bold;
+  font-size: 20px;
+  color: #555;
+  font-family: "Orbitron", sans-serif;
+}
+
+.info-data {
+  padding: 13px 19px;
+  text-align: center;
+  color: #1bbae1;
+}
+
+.info-confirmed {
+  color: #555;
+  font-size: 18;
+  padding: 10px 0px;
+}
+
+.info-active,
+.info-recovered,
+.info-deceases {
+  font-size: 19px;
+  margin-top: 5px;
+}
+
+.info-recovered {
+  color: #7ddf64;
+}
+
+.info-deceases {
+  color: #cc1034;
+}
+
+.leaflet-popup-content {
+  margin: 3px;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: #303030;
 }
