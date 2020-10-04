@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Marker, Popup } from 'react-leaflet'
 import { IconLocation } from './IconLocation'
 
@@ -6,8 +6,10 @@ import numeral from 'numeral'
 import '../assets/styles/components/Markers.css'
 
 const Markers = props => {
-  const { data } = props
-  const markers = data.map((country, id) => {
+  const { data, todayCases } = props
+  console.log(todayCases)
+
+  const markers = data.map(country => {
     return (
       <Marker
         key={country.country}

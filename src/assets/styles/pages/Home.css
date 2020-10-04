@@ -11,6 +11,12 @@
   justify-content: space-around;
   margin: 0px 60px;
 }
+.home__title {
+  position: absolute;
+  bottom: 200px;
+  color: white;
+  text-decoration: underline;
+}
 .home__container--item {
   background-color: rgba(0, 0, 0, 0.6);
   padding: 20px;

@@ -1,91 +1,58 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
+import firebase from 'firebase'
 
-import uploadImage from './uploadImage'
-import '../assets/styles/components/FileUpload.css'
-
-const FileUpload = () => {
-  const DRAG = {
-    DRAG_OVER: 1,
-    UPLOADING: 2,
-    COMPLETE: 3
-  }
-
-  const [drag, setDrag] = useState(DRAG.NONE)
-  const [task, setTask] = useState(null)
-  const [imgURL, setImgURL] = useState(null)
-
-  useEffect(() => {
-    if (task) {
-      const onProgress = () => {}
-      const onError = () => {}
-      const onComplete = () => {
-        console.log('complete')
-        task.snapshot.ref.getDownloadURL().then(setImgURL)
-      }
-      task.on('state_changed', onProgress, onError, onComplete)
+class FileUpload extends React.Component {
+  constructor () {
+    super()
+    this.state = {
+      uploadValue: 0,
+      picture: null
     }
-  }, [task])
-
-  const handleDragEnter = e => {
-    e.preventDefault()
-    setDrag(DRAG.DRAG_OVER)
+    this.handleUpload = this.handleUpload.bind(this)
   }
-  const handleDragLeave = e => {
-    e.preventDefault()
 
-    setDrag(DRAG.NONE)
-    task.snapshot.ref.getDownloadURL().then(setImgURL)
-  }
-  const handleDrop = e => {
-    e.preventDefault()
-    setDrag(DRAG.NONE)
-    const file = e.dataTransfer.files[0]
-    const task = uploadImage(file)
-
+  handleUpload = e => {
+    const file = e.target.files[0]
+    const ref = firebase.storage().ref(`/images/${file.name}`)
+    const task = ref.put(file)
     console.log(task)
-    setTask(task)
+    if (task) {
+      task.on(
+        'state_changed',
+        snapshot => {
+          let percentage =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          this.setState({
+            uploadValue: percentage
+          })
+        },
+        error => {
+          console.log(error)
+        },
+        () => {
+          task.snapshot.ref.getDownloadURL().then(img => {
+            this.setState({
+              uploadValue: 100,
+              picture: img
+            })
+          })
+        }
+      )
+    }
   }
 
-  return (
-    <form className='background-img file'>
-      <div className='file__container'>
-        <textarea
-          className='input-area'
-          placeholder='Arrastra una imagen para tu perfil'
-          onDragEnter={handleDragEnter}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
-        ></textarea>
-        {imgURL && (
-          <section>
-            <Link className='next insert-button' to='/'>
-              Siguiente
-            </Link>
-            <img className='file-image' src={imgURL} />
-          </section>
-        )}
+  render () {
+    console.log(this.state.picture)
+    return (
+      <div>
+        <progress value={this.state.uploadValue} max='100' />
+        <br />
+        <input type='file' onChange={this.handleUpload} />
+        <br />
+        <img src={this.state.picture} />
       </div>
-
-      <style jsx='true'>
-        {`
-          textarea {
-            border: ${
-              drag === DRAG.DRAG_OVER
-                ? '3px dashed #09f'
-                : '3px solid transparent'
-            };
-          }
-
-          section > img{
-            width:100%,
-            height:auto,
-            border-radius:10px;
-          }
-        `}
-      </style>
-    </form>
-  )
+    )
+  }
 }
 
 export default FileUpload

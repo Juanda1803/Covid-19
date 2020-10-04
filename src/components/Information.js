@@ -37,6 +37,7 @@ const Information = () => {
     }
     getCountries()
   }, [])
+
   const handleChange = async e => {
     const countryCode = await e.target.value
     setCountry(countryCode)
@@ -67,22 +68,19 @@ const Information = () => {
       <div className={className}>
         <div className='hero-infoBox__item'>
           <h2>Casos de Coronavirus</h2>
-          <h1>{numeral(countryInfo.todayCases).format('0,0')}</h1>
-          <h3>
-            Total = {countryInfo.cases}
-            {numeral(countryInfo.cases).format('0,0')}
-          </h3>
+          <h1>+{numeral(countryInfo.todayCases).format('0,0')}</h1>
+          <h3>Total = {numeral(countryInfo.cases).format('0,0')}</h3>
         </div>
 
         <div className='hero-infoBox__item green'>
           <h2>Recuperados</h2>
-          <h1>{numeral(countryInfo.todayRecovered).format('0,0')}</h1>
+          <h1>+{numeral(countryInfo.todayRecovered).format('0,0')}</h1>
           <h3>Total = {numeral(countryInfo.recovered).format('0,0')}</h3>
         </div>
 
         <div className='hero-infoBox__item red'>
           <h2>Muertos</h2>
-          <h1>{numeral(countryInfo.todayDeaths).format('0,0')}</h1>
+          <h1>+{numeral(countryInfo.todayDeaths).format('0,0')}</h1>
           <h3>Total = {numeral(countryInfo.deaths).format('0,0')}</h3>
         </div>
       </div>
@@ -106,9 +104,16 @@ const Information = () => {
 
           <div className='hero-table'>
             <div className='hero-table__container'>
-              <h3 className='hero-table__title'>
-                Casos de Coronavirus en vivo
-              </h3>
+              <h3 className='hero-table__title'>Casos de Coronavirus</h3>
+              <div className='table_title'>
+                <table>
+                  <tr>
+                    <td className='country__name'>Paises</td>
+                    <td className='country__cases'>Casos</td>
+                    <td className='country__todayCases'>Nuevos casos</td>
+                  </tr>
+                </table>
+              </div>
               <Table countries={tableData} />
             </div>
           </div>

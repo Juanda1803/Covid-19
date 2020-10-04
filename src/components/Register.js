@@ -150,7 +150,7 @@ const Register = () => {
                 onChange={e => handleChange(e)}
               />
             </div>
-            <Link to='/phote'>
+            <Link to='/'>
               <button className='insert-button' onClick={e => handleClick(e)}>
                 Registrate
               </button>

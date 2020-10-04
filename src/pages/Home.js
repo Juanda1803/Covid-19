@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useUser } from 'reactfire'
 
 import Information from '../components/Information'
 import '../assets/styles/pages/Home.css'
@@ -11,6 +10,7 @@ const Home = () => {
       <Information />
       <div className='home background-img'>
         <div className='home__container'>
+          <h1 className='home__title'>#YOMEQUEDOENCASA</h1>
           <Link className='home__container--item' to='/login'>
             <h1>Inicia Sesión</h1>
           </Link>

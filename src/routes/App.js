@@ -17,9 +17,9 @@ const App = () => {
     <BrowserRouter>
       <Layout>
         <Switch>
-          <Route exact path='/user' component={MapUsers} />
           {!user && <Route exact path='/' component={Home} />}
           {user && <Route exact path='/' component={Maps} />}
+          <Route exact path='/user' component={MapUsers} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/register' component={Register} />
           <Route exact path='/phote' component={FileUpload} />
